@@ -30,3 +30,15 @@
     module_enable($ar_modules, $enable_dependencies = TRUE);
     module_disable($dis_modules, $disable_dependencies = FALSE);
   }
+
+  /**
+   * Enables CCK and Date for JDT Content Type Article.
+   */
+  function central_update_7201() {
+    $ar_modules = array(
+      'cck',
+      'date'
+    );
+
+    module_enable($ar_modules, $enable_dependencies = TRUE);
+  }
