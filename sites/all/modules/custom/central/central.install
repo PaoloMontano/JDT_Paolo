@@ -1,0 +1,31 @@
+<?php
+
+  /**
+   * Enables assigned modules and dependencies.
+   * Disables toolbar and overlay.
+   */
+  function central_update_7200() {
+    $ar_modules = array(
+      'ctools',
+      'views',
+      'features',
+      'strongarm',
+      'context',
+      'token',
+      'pathauto',
+      'diff',
+      'libraries',
+      'jquery_update',
+      'devel',
+      'module_filter',
+      'admin_menu'
+    );
+
+    $dis_modules = array(
+      'toolbar',
+      'overlay'
+      );
+
+    module_enable($ar_modules, $enable_dependencies = TRUE);
+    module_disable($dis_modules, $disable_dependencies = FALSE);
+  }

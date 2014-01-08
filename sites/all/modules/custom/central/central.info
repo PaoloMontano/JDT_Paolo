@@ -1,0 +1,5 @@
+name        = Central (JDT Module)
+version     = 1.0
+core        = 7.x
+package     = Deliverables
+description = Junior Developer Tasks - Paolo
