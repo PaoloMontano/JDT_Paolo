@@ -2,4 +2,4 @@ name        = Central (JDT Module)
 version     = 1.0
 core        = 7.x
 package     = Deliverables
-description = Junior Developer Tasks - Paolo
+description = Enables common modules and disables toolbar, overlay, and shortcut.

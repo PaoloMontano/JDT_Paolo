@@ -23,6 +23,7 @@
 
     $dis_modules = array(
       'toolbar',
+      'shortcut',
       'overlay'
       );
 
