@@ -1,17 +1,11 @@
 <?php
   
   /**
-   * Test case
-   */
-  function central_install() {
-  }
-
-  /**
    * Enables assigned modules and dependencies.
    * Disables toolbar and overlay.
    */
-  function central_update_7201() {
-    $ar_modules = array(
+  function central_install() {
+      $ar_modules = array(
       'ctools',
       'views',
       'features',
