@@ -42,3 +42,20 @@
 
     module_enable($ar_modules, $enable_dependencies = TRUE);
   }
+
+  /**
+   * Enables views_ui, context_ui, references,
+   * node_references, user_references, and field_group.
+   */
+  function central_update_7202() {
+    $ar_modules = array(
+      'views_ui',
+      'context_ui',
+      'references',
+      'node_reference',
+      'user_reference',
+      'field_group'
+    );
+
+    module_enable($ar_modules, $enable_dependencies = TRUE);
+  }
