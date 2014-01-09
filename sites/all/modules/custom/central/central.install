@@ -36,7 +36,6 @@
    */
   function central_update_7201() {
     $ar_modules = array(
-      'cck',
       'date',
       'jdt_content_type_article'
     );
