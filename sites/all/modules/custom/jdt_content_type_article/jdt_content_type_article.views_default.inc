@@ -19,7 +19,7 @@ function jdt_content_type_article_views_default_views() {
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-// 
+
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Articles';
@@ -69,21 +69,14 @@ function jdt_content_type_article_views_default_views() {
     'image_style' => 'jdt_image',
     'image_link' => '',
   );
-  /* Field: Content: Contributors (field_contributors:delta) */
-  $handler->display->display_options['fields']['delta']['id'] = 'delta';
-  $handler->display->display_options['fields']['delta']['table'] = 'field_data_field_contributors';
-  $handler->display->display_options['fields']['delta']['field'] = 'delta';
-  $handler->display->display_options['fields']['delta']['hide_empty'] = TRUE;
-  /* Field: Content: Related Articles (field_related_articles:delta) */
-  $handler->display->display_options['fields']['delta_1']['id'] = 'delta_1';
-  $handler->display->display_options['fields']['delta_1']['table'] = 'field_data_field_related_articles';
-  $handler->display->display_options['fields']['delta_1']['field'] = 'delta';
-  $handler->display->display_options['fields']['delta_1']['hide_empty'] = TRUE;
-  /* Field: Content: Tags (field_tags:delta) */
-  $handler->display->display_options['fields']['delta_2']['id'] = 'delta_2';
-  $handler->display->display_options['fields']['delta_2']['table'] = 'field_data_field_tags';
-  $handler->display->display_options['fields']['delta_2']['field'] = 'delta';
-  $handler->display->display_options['fields']['delta_2']['hide_empty'] = TRUE;
+  /* Field: Content: Related Articles */
+  $handler->display->display_options['fields']['field_related_articles']['id'] = 'field_related_articles';
+  $handler->display->display_options['fields']['field_related_articles']['table'] = 'field_data_field_related_articles';
+  $handler->display->display_options['fields']['field_related_articles']['field'] = 'field_related_articles';
+  /* Field: Content: Contributors */
+  $handler->display->display_options['fields']['field_contributors']['id'] = 'field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['field'] = 'field_contributors';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
