@@ -5,7 +5,7 @@
    * Disables toolbar and overlay.
    */
   function central_install() {
-      $ar_modules = array(
+    $ar_modules = array(
       'ctools',
       'views',
       'features',
@@ -25,10 +25,10 @@
       'toolbar',
       'shortcut',
       'overlay'
-      );
+    );
 
-    module_enable($ar_modules, $enable_dependencies = TRUE);
-    module_disable($dis_modules, $disable_dependencies = FALSE);
+    module_enable($ar_modules, TRUE);
+    module_disable($dis_modules, FALSE);
   }
 
   /**
@@ -40,7 +40,7 @@
       'jdt_content_type_article'
     );
 
-    module_enable($ar_modules, $enable_dependencies = TRUE);
+    module_enable($ar_modules, TRUE);
   }
 
   /**
@@ -57,5 +57,6 @@
       'field_group'
     );
 
-    module_enable($ar_modules, $enable_dependencies = TRUE);
+    module_enable($ar_modules, TRUE);
   }
+
