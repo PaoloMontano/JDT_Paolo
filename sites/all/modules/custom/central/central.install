@@ -18,13 +18,13 @@
       'jquery_update',
       'devel',
       'module_filter',
-      'admin_menu'
+      'admin_menu',
     );
 
     $dis_modules = array(
       'toolbar',
       'shortcut',
-      'overlay'
+      'overlay',
     );
 
     module_enable($ar_modules, TRUE);
@@ -37,7 +37,7 @@
   function central_update_7201() {
     $ar_modules = array(
       'date',
-      'jdt_content_type_article'
+      'jdt_content_type_article',
     );
 
     module_enable($ar_modules, TRUE);
@@ -54,9 +54,8 @@
       'references',
       'node_reference',
       'user_reference',
-      'field_group'
+      'field_group',
     );
 
     module_enable($ar_modules, TRUE);
   }
-

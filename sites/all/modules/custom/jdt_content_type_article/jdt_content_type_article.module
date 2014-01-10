@@ -4,4 +4,32 @@
  * Code for the JDT Content Type Article feature.
  */
 
+/**
+ * [central_date_format_types description]
+ * @return [type] [description]
+ */
+function jdt_content_type_article_date_format_types() {
+  return array(
+    'jdt_views' => t('JDT Views'),
+  );
+}
+
+/**
+ * Immplements hook_date_formats() to set Views date format for export.
+ * @return jdt_test Views date format
+ */
+function jdt_content_type_article_date_formats() {
+  $type = 'jdt_views';
+  $format = 'F j, Y';
+  variable_set('date_formats_' . $type, $format);
+
+  return array(
+    array(
+      'type' => $type;
+      'format' => $format,
+      'locale' => array(),
+    ),
+  );
+}
+
 include_once 'jdt_content_type_article.features.inc';
