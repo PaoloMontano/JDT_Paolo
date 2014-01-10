@@ -25,7 +25,7 @@ function jdt_content_type_article_date_formats() {
 
   return array(
     array(
-      'type' => $type;
+      'type' => $type,
       'format' => $format,
       'locale' => array(),
     ),

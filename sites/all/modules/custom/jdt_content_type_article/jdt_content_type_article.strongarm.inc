@@ -63,7 +63,7 @@ function jdt_content_type_article_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_format_jdt_views_date';
-  $strongarm->value = 'F j, Y';
+  $strongarm->value = 'F j, Y A';
   $export['date_format_jdt_views_date'] = $strongarm;
 
   $strongarm = new stdClass();
