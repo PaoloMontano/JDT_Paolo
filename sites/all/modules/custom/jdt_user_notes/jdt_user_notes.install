@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Creates base table for JDT User Notes
+ * @return Array 2D Array for creating table using hookos_schema.
+ */
+function jdt_user_notes_schema() {
+  $schema['jdt_user_notes'] = array(
+    'description' => 'jdt_user_notes base table',
+    'fields' => array(
+      'note_id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'article_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'author_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'note_text' => array(
+        'type' => 'varchar',
+        'length' => 1024,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('note_id'),
+  );
+  return $schema;
+}

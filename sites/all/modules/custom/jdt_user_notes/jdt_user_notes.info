@@ -1,0 +1,7 @@
+name        = JDT User Notes
+version     = 1.0
+core        = 7.x
+package     = Deliverables
+description = Enables users with certain permissions to add notes to JDT Content
+
+dependencies[] = jdt_content_type_article
