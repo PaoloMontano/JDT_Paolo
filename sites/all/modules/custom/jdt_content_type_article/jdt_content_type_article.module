@@ -5,8 +5,7 @@
  */
 
 /**
- * [central_date_format_types description]
- * @return [type] [description]
+ * Creates Date Format Title.
  */
 function jdt_content_type_article_date_format_types() {
   return array(

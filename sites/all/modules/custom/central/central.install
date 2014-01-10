@@ -59,3 +59,11 @@
 
     module_enable($ar_modules, TRUE);
   }
+
+  function central_update_7203() {
+    $ar_modules = array(
+      'demo',
+    );
+
+    module_enable($ar_modules, TRUE);
+  }
