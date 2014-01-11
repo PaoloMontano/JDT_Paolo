@@ -1,1 +1,14 @@
 <?php
+
+/**
+ * Implements hooks_permission to determine if current user has sufficient
+ * permission to access jdt_user_notes database.
+ * @return [type] [description]
+ */
+function jdt_user_notes_permission() {
+  return array(
+    'administer jdt_user_notes' => array(
+      'title' => 'Administer of jdt_user_notes',
+    ),
+  );
+}
