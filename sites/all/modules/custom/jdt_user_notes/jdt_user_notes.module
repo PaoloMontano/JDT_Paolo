@@ -1,14 +1,150 @@
 <?php
+/**
+ * @file
+ * Code for JDT User Notes
+ */
 
 /**
- * Implements hooks_permission to determine if current user has sufficient
- * permission to access jdt_user_notes database.
- * @return [type] [description]
+ * Sets up URL Path for JDT User Notes
  */
-function jdt_user_notes_permission() {
-  return array(
-    'administer jdt_user_notes' => array(
-      'title' => 'Administer of jdt_user_notes',
-    ),
+function jdt_user_notes_menu() {
+  $items = array();
+  $items['jdt_user_notes/new'] = array(
+    'title' => t('New JDT User Notes'),
+    'page callback' => 'jdt_user_notes_new_form',
+    'access arguments' => array('access content'),
+    'description' => t('My form'),
+    'type' => MENU_CALLBACK,
   );
+  $items['jdt_user_notes/edit'] = array(
+    'title' => t('Edit JDT User Notes'),
+    'page callback' => 'jdt_user_notes_edit_form',
+    'access arguments' => array('access content'),
+    'description' => t('My form'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
 }
+
+/**
+ * Calls JDT New Notes Form.
+ * @return Array Form array
+ */
+function jdt_user_notes_new_form() {
+  return drupal_get_form('jdt_user_notes_add_my_form');
+}
+
+/**
+ * Calls JDT Edit Notes form.
+ * @return Array Form array
+ */
+function jdt_user_notes_edit_form() {
+  return drupal_get_form('jdt_user_notes_edit_my_form');
+}
+
+/**
+ * Associative array for new notes form.
+ * @return Associative Array for New Notes form.
+ */
+function jdt_user_notes_add_my_form() {
+  $form['jdt_form_new'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('New JDT User Notes'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['jdt_form_new']['jdt_u_uid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('User ID'),
+    '#required' => TRUE,
+    '#default_value' => jdt_user_notes_get_uid(),
+    '#size' => 3,
+    '#maxlength' => 3,
+    '#disabled' => TRUE,
+  );
+  $form['jdt_form_new']['jdt_article_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('JDT Article Node ID'),
+    '#required' => TRUE,
+    '#size' => 4,
+    '#maxlength' => 4,
+  );
+  $form['jdt_form_new']['jdt_user_note'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Your user notes.',
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+  return $form;
+}
+
+/**
+ * Associative array for edit notes form.
+ * @return Associative Array for Edit Notes form.
+ */
+function jdt_user_notes_edit_my_form() {
+  $form['jdt_form_edit'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Edit a JDT Note'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['jdt_form_edit']['jdt_note_id'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Edit JDT Note ID',
+    '#size' => 3,
+    '#maxlength' => 3,
+  );
+  $form['jdt_form_edit']['jdt_artile_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Edit JDT Article ID'),
+    '#size' => 4,
+    '#maxlength' => 4,
+  );
+  $form['jdt_form_edit']['jdt_user_note'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Edit user notes.',
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+  return $form;
+}
+
+/**
+ * Validation for new notes form.
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
+function jdt_user_notes_add_my_form_validate($form, &$form_state) {
+
+}
+
+/**
+ * Validation for edit notes form.
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
+function jdt_user_notes_edit_my_form_validate($form, &$form_state) {
+
+}
+
+// jdt_user_notes_add_my_form
+function jdt_user_notes_add_my_form_submit($form, &$form_state) {
+    // jdt_user_notes_insert_vals($form_state['values']);
+  drupal_set_message(t('It would be written as new.'));
+
+}
+
+function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
+  drupal_set_message(t('It would be written as an edit'));
+}
+
+include_once 'jdt_user_notes_api.inc';

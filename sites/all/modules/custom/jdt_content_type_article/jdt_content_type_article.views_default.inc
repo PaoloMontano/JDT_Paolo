@@ -49,7 +49,7 @@ function jdt_content_type_article_views_default_views() {
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['alter']['nl2br'] = TRUE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
-    'format_type' => 'jdt_views',
+    'format_type' => 'jdt_content_type_article_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',

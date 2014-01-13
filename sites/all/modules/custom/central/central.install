@@ -4,7 +4,7 @@
    * Enables assigned modules and dependencies.
    * Disables toolbar and overlay.
    */
-  function central_install() {
+  function central_update_7200() {
     $ar_modules = array(
       'ctools',
       'views',
@@ -55,14 +55,6 @@
       'node_reference',
       'user_reference',
       'field_group',
-    );
-
-    module_enable($ar_modules, TRUE);
-  }
-
-  function central_update_7203() {
-    $ar_modules = array(
-      'demo',
     );
 
     module_enable($ar_modules, TRUE);
