@@ -12,14 +12,14 @@ function jdt_user_notes_menu() {
   $items['jdt_user_notes/new'] = array(
     'title' => t('New JDT User Notes'),
     'page callback' => 'jdt_user_notes_new_form',
-    'access arguments' => array('access content'),
+    'access arguments' => array('administrator'),
     'description' => t('My form'),
     'type' => MENU_CALLBACK,
   );
   $items['jdt_user_notes/edit'] = array(
     'title' => t('Edit JDT User Notes'),
     'page callback' => 'jdt_user_notes_edit_form',
-    'access arguments' => array('access content'),
+    'access arguments' => array('administrator'),
     'description' => t('My form'),
     'type' => MENU_CALLBACK,
   );
@@ -86,6 +86,7 @@ function jdt_user_notes_add_my_form() {
  * @return Associative Array for Edit Notes form.
  */
 function jdt_user_notes_edit_my_form() {
+
   $form['jdt_form_edit'] = array(
     '#type' => 'fieldset',
     '#title' => t('Edit a JDT Note'),
@@ -136,13 +137,27 @@ function jdt_user_notes_edit_my_form_validate($form, &$form_state) {
 
 }
 
-// jdt_user_notes_add_my_form
+/**
+ * [jdt_user_notes_add_my_form_submit description]
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
 function jdt_user_notes_add_my_form_submit($form, &$form_state) {
-    // jdt_user_notes_insert_vals($form_state['values']);
-  drupal_set_message(t('It would be written as new.'));
+  if (user_access('administrator')) {
+   // jdt_user_notes_insert_vals($form_state['values']);
+   drupal_set_message(t('It would be written as new.'));
+  }
+  drupal_set_message(user_access('administrator'));
 
 }
 
+/**
+ * [jdt_user_notes_edit_my_form_submit description]
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
 function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
   drupal_set_message(t('It would be written as an edit'));
 }
