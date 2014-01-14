@@ -11,36 +11,38 @@ function jdt_user_notes_menu() {
   $items = array();
   $items['jdt_user_notes/new'] = array(
     'title' => t('New JDT User Notes'),
-    'page callback' => 'jdt_user_notes_new_form',
-    'access arguments' => array('administrator'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jdt_user_notes_add_my_form'),
+    'access arguments' => array('administer jdt_user_notes'),
     'description' => t('My form'),
     'type' => MENU_CALLBACK,
   );
   $items['jdt_user_notes/edit'] = array(
     'title' => t('Edit JDT User Notes'),
-    'page callback' => 'jdt_user_notes_edit_form',
-    'access arguments' => array('administrator'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jdt_user_notes_edit_my_form'),
+    'access arguments' => array('administer jdt_user_notes'),
     'description' => t('My form'),
     'type' => MENU_CALLBACK,
   );
   return $items;
 }
 
-/**
- * Calls JDT New Notes Form.
- * @return Array Form array
- */
-function jdt_user_notes_new_form() {
-  return drupal_get_form('jdt_user_notes_add_my_form');
-}
+// /**
+//  * Calls JDT New Notes Form.
+//  * @return Array Form array
+//  */
+// function jdt_user_notes_new_form() {
+//   return drupal_get_form('jdt_user_notes_add_my_form');
+// }
 
-/**
- * Calls JDT Edit Notes form.
- * @return Array Form array
- */
-function jdt_user_notes_edit_form() {
-  return drupal_get_form('jdt_user_notes_edit_my_form');
-}
+// /**
+//  * Calls JDT Edit Notes form.
+//  * @return Array Form array
+//  */
+// function jdt_user_notes_edit_form() {
+//   return drupal_get_form('jdt_user_notes_edit_my_form');
+// }
 
 /**
  * Associative array for new notes form.
@@ -99,7 +101,7 @@ function jdt_user_notes_edit_my_form() {
     '#size' => 3,
     '#maxlength' => 3,
   );
-  $form['jdt_form_edit']['jdt_artile_id'] = array(
+  $form['jdt_form_edit']['jdt_article_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Edit JDT Article ID'),
     '#size' => 4,
@@ -124,6 +126,7 @@ function jdt_user_notes_edit_my_form() {
  * @return [type]             [description]
  */
 function jdt_user_notes_add_my_form_validate($form, &$form_state) {
+  $jdt_article = $form_state['values']['jdt_article_id'];
 
 }
 
@@ -144,11 +147,8 @@ function jdt_user_notes_edit_my_form_validate($form, &$form_state) {
  * @return [type]             [description]
  */
 function jdt_user_notes_add_my_form_submit($form, &$form_state) {
-  if (user_access('administrator')) {
-   // jdt_user_notes_insert_vals($form_state['values']);
-   drupal_set_message(t('It would be written as new.'));
-  }
-  drupal_set_message(user_access('administrator'));
+  jdt_user_notes_insert_vals($form_state['values']);
+ drupal_set_message(t('It would be written as new.'));
 
 }
 
