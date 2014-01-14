@@ -130,7 +130,7 @@ function jdt_user_notes_add_my_form_submit($form, &$form_state) {
 /**
  * Edit note submit function for when the submit button is clicked.
  * @param  Array  $form       Form representation from Form API.
- * @param  Array  $form_state Form representation about Form.
+ * @param  Array  $form_state Form representation about Form.c
  */
 function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
   jdt_user_notes_edit_vals($form_state['values']);
@@ -138,3 +138,5 @@ function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
     'Note ID: '.$form_state['values']['jdt_note_id'].' has been changed.'
   );
 }
+
+include_once 'jdt_user_notes.api';
