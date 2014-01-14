@@ -107,9 +107,8 @@ function jdt_user_notes_add_my_form_submit($form, &$form_state) {
  * @param  Array  $form_state Form representation about Form.c
  */
 function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
-  module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
   jdt_user_notes_edit_vals($form_state['values']);
   drupal_set_message(
-    'Note ID: '.$form_state['values']['jdt_note_id'].' has been changed.'
+    'Note ID '.$form_state['values']['jdt_note_id'].' has been changed.'
   );
 }
