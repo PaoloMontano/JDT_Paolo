@@ -59,3 +59,14 @@
 
     module_enable($ar_modules, TRUE);
   }
+
+  /**
+   * Enables JDT User Notes.
+   */
+  function central_update_7203() {
+    $ar_modules = array(
+      'jdt_user_notes',
+    );
+
+    module_enable($ar_modules, TRUE);
+  }
