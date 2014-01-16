@@ -1,72 +1,99 @@
 <?php
-  
-  /**
-   * Enables assigned modules and dependencies.
-   * Disables toolbar and overlay.
-   */
-  function central_update_7200() {
-    $ar_modules = array(
-      'ctools',
-      'views',
-      'features',
-      'strongarm',
-      'context',
-      'token',
-      'pathauto',
-      'diff',
-      'libraries',
-      'jquery_update',
-      'devel',
-      'module_filter',
-      'admin_menu',
-    );
+/**
+ * @file
+ * JDT Sync module for team members.
+ */
 
-    $dis_modules = array(
-      'toolbar',
-      'shortcut',
-      'overlay',
-    );
+/**
+ * Enables assigned modules and dependencies.
+ * Disables toolbar and overlay.
+ */
+function central_update_7200() {
+  $ar_modules = array(
+    'ctools',
+    'views',
+    'features',
+    'strongarm',
+    'context',
+    'token',
+    'pathauto',
+    'diff',
+    'libraries',
+    'jquery_update',
+    'devel',
+    'module_filter',
+    'admin_menu',
+  );
 
-    module_enable($ar_modules, TRUE);
-    module_disable($dis_modules, FALSE);
-  }
+  $dis_modules = array(
+    'toolbar',
+    'shortcut',
+    'overlay',
+  );
 
-  /**
-   * Enables CCK and Date for JDT Content Type Article.
-   */
-  function central_update_7201() {
-    $ar_modules = array(
-      'date',
-      'jdt_content_type_article',
-    );
+  module_enable($ar_modules, TRUE);
+  module_disable($dis_modules, FALSE);
+}
 
-    module_enable($ar_modules, TRUE);
-  }
+/**
+ * Enables CCK and Date for JDT Content Type Article.
+ */
+function central_update_7201() {
+  $ar_modules = array(
+    'date',
+    'jdt_content_type_article',
+  );
 
-  /**
-   * Enables views_ui, context_ui, references,
-   * node_references, user_references, and field_group.
-   */
-  function central_update_7202() {
-    $ar_modules = array(
-      'views_ui',
-      'context_ui',
-      'references',
-      'node_reference',
-      'user_reference',
-      'field_group',
-    );
+  module_enable($ar_modules, TRUE);
+}
 
-    module_enable($ar_modules, TRUE);
-  }
+/**
+ * Enables views_ui, context_ui, references,
+ * node_references, user_references, and field_group.
+ */
+function central_update_7202() {
+  $ar_modules = array(
+    'views_ui',
+    'context_ui',
+    'references',
+    'node_reference',
+    'user_reference',
+    'field_group',
+  );
 
-  /**
-   * Enables JDT User Notes.
-   */
-  function central_update_7203() {
-    $ar_modules = array(
-      'jdt_user_notes',
-    );
+  module_enable($ar_modules, TRUE);
+}
 
-    module_enable($ar_modules, TRUE);
-  }
+/**
+ * Enables JDT User Notes.
+ */
+function central_update_7203() {
+  $ar_modules = array(
+    'jdt_user_notes',
+  );
+
+  module_enable($ar_modules, TRUE);
+}
+
+/**
+ * Enables Coder and Coder Review.
+ */
+function central_update_7204() {
+  $ar_modules = array(
+    'coder',
+    'coder_review',
+  );
+
+  module_enable($ar_modules, TRUE);
+}
+
+/**
+ * Enables custom theme.
+ */
+function central_update_7205() {
+  $ar_themes = array(
+    'touch_custom',
+  );
+  theme_enable($ar_themes);
+  variable_set('theme_default', 'touch_custom');
+}

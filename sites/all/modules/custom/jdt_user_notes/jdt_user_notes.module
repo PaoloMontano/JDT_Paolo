@@ -8,24 +8,60 @@
  * Sets up URL Path for JDT User Notes
  */
 function jdt_user_notes_menu() {
-  $items = array();
-  $items['jdt_user_notes/%/new'] = array(
-    'title' => t('New JDT User Notes'),
+  $items['node/%/jdt_user_note_add'] = array(
+    'title' => 'New JDT User Notes',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('jdt_user_notes_add_my_form', 1),
     'access arguments' => array('administer jdt_user_notes'),
-    'description' => t('My form'),
+    'description' => 'My form',
     'file' => 'includes/jdt_user_notes.forms.inc',
-    'type' => MENU_CALLBACK,
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1000,
   );
-  $items['jdt_user_notes/%/edit'] = array(
-    'title' => t('Edit JDT User Notes'),
+  $items['node/%/jdt_user_note_edit/%'] = array(
+    'title' => 'Edit JDT User Notes',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('jdt_user_notes_edit_my_form', 1),
+    'page arguments' => array('jdt_user_notes_edit_my_form', 3),
     'access arguments' => array('administer jdt_user_notes'),
-    'description' => t('My form'),
+    'description' => 'My form',
     'file' => 'includes/jdt_user_notes.forms.inc',
-    'type' => MENU_CALLBACK,
+  );
+  $items['node/%/jdt_user_note_view'] = array(
+    'title' => 'View JDT User Note',
+    'page callback' => 'theme',
+    'page arguments' => array('jdt_user_notes_view'),
+    'access arguments' => array('adminster jdt_user_notes'),
+    'description' => 'My form',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1001,
   );
   return $items;
+}
+
+/**
+ * Implements hook_theme().
+ * @param  Array  $existing An array of existing implementations that may be
+ *                          used for override purposes. This is primarily useful
+ *                          for themes that may wish to examine existing
+ *                          implementations to extract data (such as arguments)
+ *                          so that it may properly register its own, higher
+ *                          priority implementations.
+ * @param  String $type     Whether a theme, module, etc. is being processed.
+ *                          This is primarily useful so that themes tell if they
+ *                          are the actual theme being called or a parent theme.
+ * @param  String $theme    The actual name of theme, module, etc. that is being
+ *                          processed.
+ * @param  String $path     The directory path of the theme or module, so that
+ *                          it doesn't need to be looked up.
+ */
+function jdt_user_notes_theme($existing, $type, $theme, $path) {
+  return array(
+    'jdt_user_notes_view' => array(
+      'variables' => array(),
+      'template' => 'jdt_user_notes_disp',
+      'path' => drupal_get_path('module', 'jdt_user_notes') . '/themes',
+      'file' => 'theme.inc',
+      'arguments' => array(),
+    ),
+  );
 }

@@ -7,7 +7,7 @@
 /**
  * Implements hooks_permission to determine if current user has sufficient
  * permission to access jdt_user_notes database.
- * @return Array 
+ * @return Array Drupal user permissions.
  */
 function jdt_user_notes_permission() {
   return array(
@@ -24,12 +24,12 @@ function jdt_user_notes_permission() {
  */
 function jdt_user_notes_get_note_id() {
   $result = db_query(
-    'SELECT MAX(note_id) AS HIGH
+    'SELECT MAX(note_id) AS current_note
      FROM {jdt_user_notes}'
   );
   $jdt_int_val = $result->fetchAssoc();
 
-  return $jdt_int_val['HIGH'];
+  return $jdt_int_val['current_note'];
 }
 
 /**
@@ -38,27 +38,27 @@ function jdt_user_notes_get_note_id() {
  */
 function jdt_user_notes_get_nid($jdt_cid) {
   $result = db_query(
-    'SELECT article_id AS jdt_nid
+    'SELECT article_id
      FROM {jdt_user_notes}
      WHERE note_id = :note_cid',
-     array('note_cid' => $jdt_cid)
+    array('note_cid' => $jdt_cid)
   );
   $jdt_int_val = $result->fetchAssoc();
-  return $jdt_int_val['jdt_nid'];
+  return $jdt_int_val['article_id'];
 }
 
 /**
- * [jdt_user_notes_get_note description]
- * @param  Int    $jdt_cid Unique Note ID.
- * @return String          User note text.
+ * Gets user text from specific note ID.
+ * @param  Int    $jdt_note_id Unique Note ID.
+ * @return String              User note text.
  */
-function jdt_user_notes_get_note($jdt_cid) {
+function jdt_user_notes_get_note($jdt_note_id) {
   $result = db_query(
     'SELECT note_text AS user_note
      FROM   {jdt_user_notes}
      WHERE  note_id = :content',
     array(
-      ':content' => $jdt_cid
+      ':content' => $jdt_note_id
     )
   );
   $jdt_string_val = $result->fetchAssoc();
@@ -96,15 +96,36 @@ function jdt_user_notes_edit_vals($form) {
 /**
  * Checks if Note ID exists.
  * @param  int    $jdt_note_id Unique Note ID
- * @return int                 Note_ID from {jdt_user_notes}
+ * @return int                 Note_ID from database schema.
  */
 function jdt_user_notes_check_note_id($jdt_note_id) {
   $result = db_query(
     'SELECT note_id AS ID
      FROM {jdt_user_notes}
      WHERE note_id = :jdt_req',
-     array('jdt_req' => $jdt_note_id)
+    array('jdt_req' => $jdt_note_id)
   );
   $jdt_return_value = $result->fetchAssoc();
   return $jdt_return_value['ID'];
+}
+
+/**
+ * Returns an array of JDT User notes containing its Note ID and Note Text.
+ * @param  int    $jdt_req Node ID being requested.
+ * @return Array          Index array which contains Note ID and Note Text.
+ */
+function jdt_user_notes_get_user_article($jdt_req) {
+  $jdt_test = array();
+  $results = db_query(
+    'SELECT note_id, note_text
+     FROM {jdt_user_notes}
+     WHERE article_id = :req',
+    array('req' => $jdt_req)
+  );
+  while ($single = $results->fetchAssoc()) {
+    $jdt_test[] = array(
+      $single['note_id'], $single['note_text'],
+    );
+  }
+  return $jdt_test;
 }
