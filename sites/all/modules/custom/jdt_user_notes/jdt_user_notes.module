@@ -57,7 +57,6 @@ function jdt_user_notes_menu() {
 function jdt_user_notes_theme($existing, $type, $theme, $path) {
   return array(
     'jdt_user_notes_view' => array(
-      'variables' => array(),
       'template' => 'jdt_user_notes_disp',
       'path' => drupal_get_path('module', 'jdt_user_notes') . '/themes',
       'file' => 'theme.inc',
