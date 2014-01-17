@@ -112,7 +112,7 @@ function jdt_user_notes_check_note_id($jdt_note_id) {
 /**
  * Returns an array of JDT User notes containing its Note ID and Note Text.
  * @param  int    $jdt_req Node ID being requested.
- * @return Array          Index array which contains Note ID and Note Text.
+ * @return Array           Index array which contains Note ID and Note Text.
  */
 function jdt_user_notes_get_user_article($jdt_req) {
   $jdt_test = array();
