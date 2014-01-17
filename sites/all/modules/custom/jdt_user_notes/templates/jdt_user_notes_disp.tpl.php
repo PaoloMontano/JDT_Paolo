@@ -5,12 +5,8 @@
  */
 ?>
 
-<?php if (arg(0) == 'node' && is_numeric($jdt_req = arg(1))): ?>
+<?php foreach ($jdt_articles as $jdt_article): ?>
   <br />
-  <?php $jdt_notes_array = jdt_user_notes_get_notes($jdt_req); ?>
-  <?php foreach ($jdt_notes_array as $jdt_note): ?>
-    <p><?php print $jdt_note[1]; ?></p>
-    <p><a href="./jdt_user_note_edit/<?php print $jdt_note[0]; ?>">Edit this note</a></p>
-    <br />
-  <?php endforeach; ?>
-<?php endif; ?>
+  <p><?php print $jdt_article[1]; ?></p>
+  <p><?php print l('Edit this note', 'node/' . $jdt_article_id . '/jdt_user_note_edit/' . $jdt_article[0]) ?></p>
+<?php endforeach; ?>

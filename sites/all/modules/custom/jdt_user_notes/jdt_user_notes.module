@@ -29,7 +29,7 @@ function jdt_user_notes_menu() {
   $items['node/%/jdt_user_note_view'] = array(
     'title' => 'View JDT User Note',
     'page callback' => 'theme',
-    'page arguments' => array('jdt_user_notes_view'),
+    'page arguments' => array('jdt_user_notes_view', 1),
     'access arguments' => array('adminster jdt_user_notes'),
     'description' => 'My form',
     'type' => MENU_LOCAL_TASK,
@@ -57,11 +57,13 @@ function jdt_user_notes_menu() {
 function jdt_user_notes_theme($existing, $type, $theme, $path) {
   return array(
     'jdt_user_notes_view' => array(
-      'variables' => array(),
+      'variables' => array(
+        'jdt_article_id' => array(),
+      ),
       'template' => '/templates/jdt_user_notes_disp',
       'path' => drupal_get_path('module', 'jdt_user_notes'),
       'file' => '/includes/jdt_user_notes.theme.inc',
-      'arguments' => array(),
     ),
   );
 }
+
