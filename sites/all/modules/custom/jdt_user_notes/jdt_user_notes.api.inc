@@ -124,7 +124,8 @@ function jdt_user_notes_get_user_article($jdt_req) {
   );
   while ($single = $results->fetchAssoc()) {
     $jdt_test[] = array(
-      $single['note_id'], $single['note_text'],
+      'note_text' => $single['note_text'],
+      'note_link' => l('Edit this note', 'node/' . $jdt_req . '/jdt_user_note_edit/' . $single['note_id']),
     );
   }
   return $jdt_test;
