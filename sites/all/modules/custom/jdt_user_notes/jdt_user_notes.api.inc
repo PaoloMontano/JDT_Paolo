@@ -126,6 +126,7 @@ function jdt_user_notes_get_user_article($jdt_req) {
     $jdt_test[] = array(
       'note_text' => $single['note_text'],
       'note_link' => l('Edit this note', 'node/' . $jdt_req . '/jdt_user_note_edit/' . $single['note_id']),
+      'note_div' => 'jdt_div_' . $single['note_id'],
     );
   }
   return $jdt_test;
