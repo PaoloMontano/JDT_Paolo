@@ -115,6 +115,7 @@ function jdt_user_notes_check_note_id($jdt_note_id) {
  * @return Array           Index array which contains Note ID and Note Text.
  */
 function jdt_user_notes_get_user_article($jdt_req) {
+  module_load_include('inc', 'jdt_user_notes', 'includes/jdt_user_notes.forms');
   $jdt_test = array();
   $results = db_query(
     'SELECT note_id, note_text
@@ -125,8 +126,10 @@ function jdt_user_notes_get_user_article($jdt_req) {
   while ($single = $results->fetchAssoc()) {
     $jdt_test[] = array(
       'note_text' => $single['note_text'],
+      'note_ajax_div' => 'jdt_ajax_' . $single['note_id'],
       'note_link' => l('Edit this note', 'node/' . $jdt_req . '/jdt_user_note_edit/' . $single['note_id']),
       'note_div' => 'jdt_div_' . $single['note_id'],
+      'note_ajax' => jdt_render_link($single['note_id']),
     );
   }
   return $jdt_test;

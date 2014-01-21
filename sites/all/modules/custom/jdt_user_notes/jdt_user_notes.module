@@ -35,6 +35,19 @@ function jdt_user_notes_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 1001,
   );
+  $items['jdt/test'] = array(
+    'page callback' => 'jdt_render_link',
+    'page arguments' => array('3'),
+    'access arguments' => array('administer jdt_user_notes'),
+    'file' => 'includes/jdt_user_notes.forms.inc',
+  );
+  $items['jdt/%/jdt_ajax'] = array(
+    'page callback' => 'jdt_link_response',
+    'page arguments' => array(1),
+    'access arguments' => array('administer jdt_user_notes'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/jdt_user_notes.forms.inc'
+  );
   return $items;
 }
 

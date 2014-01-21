@@ -118,3 +118,32 @@ function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
     t('Note ID ' . $form_state['values']['jdt_note_id'] . ' has been changed.')
   );
 }
+
+function jdt_render_link($jdt_cid) {
+  drupal_add_library('system', 'drupal.ajax');
+  $link = l(
+    t('Ajax me'),
+    'jdt/' . $jdt_cid . '/jdt_ajax/nojs/',
+    array(
+      'attributes' => array(
+        'class' => array('use-ajax'),
+      )
+    )
+  );
+  return $link;
+}
+
+function jdt_link_response($jdt_cid, $type = 'ajax') {
+  if ($type == 'ajax') {
+    module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
+    $output = jdt_user_notes_get_note($jdt_cid);
+    $commands = array();
+    $commands[] = ajax_command_append('#jdt_div_' . $jdt_cid, $output);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+  }
+  else {
+    $output = t("This is some content delivered via a page load. JDT.");
+    return $output;
+  }
+}
