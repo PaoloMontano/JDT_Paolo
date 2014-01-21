@@ -119,10 +119,73 @@ function jdt_user_notes_edit_my_form_submit($form, &$form_state) {
   );
 }
 
+/**
+ * Ajax form that is created when user clicks on "Edit Note".
+ * @param  Array  $form       Form representation from Form API.
+ * @param  Array  $form_state Form representation about Form.
+ * @param  int    $jdt_cid    Note ID.
+ * @return Associative Array for Edit Notes form.
+ */
+function jdt_user_notes_ajax_form($form, &$form_state, $jdt_cid) {
+  module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
+  $form['jdt_form_edit'] = array(
+    '#type' => 'markup',
+    '#prefix' => '<div id="jdt_div_' . $jdt_cid . '">',
+    '#suffix' => '</div>',
+  );
+  $form['jdt_form_edit']['jdt_user_note'] = array(
+    '#type' => 'textarea',
+    '#default_value' => jdt_user_notes_get_note($jdt_cid),
+    '#rows' => 8,
+  );
+  $form['jdt_form_edit']['jdt_note_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $jdt_cid,
+  );
+  $form['jdt_form_edit']['submit'] = array(
+    '#type' => 'submit',
+    '#ajax' => array(
+      'callback' => 'jdt_user_notes_ajax_callback',
+      'method' => 'replace',
+      'wrapper' => 'jdt_div_' . $jdt_cid,
+    ),
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for Ajax form.
+ * @param  Array  $form       Form representation from Form API.
+ * @param  Array  $form_state Form representation about Form.
+ */
+function jdt_user_notes_ajax_form_submit($form, &$form_state) {
+  module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
+  jdt_user_notes_edit_vals($form_state['values']);
+}
+
+/**
+ * Ajax callback for Ajax form.
+ * @param  Array  $form       Form representation from Form API.
+ * @param  Array  $form_state Form representation about Form.
+ * @return String             HTML Markup.
+ */
+function jdt_user_notes_ajax_callback($form, &$form_state) {
+  $element['#markup'] = '<div id="jdt_div_' . $form_state['values']['jdt_note_id'] . '">';
+  $element['#markup'] .= $form_state['values']['jdt_user_note'];
+  $element['#markup'] .= '</div>';
+  return $element;
+}
+
+/**
+ * [jdt_render_link description]
+ * @param  int    $jdt_cid Specific Note ID.
+ * @return String          Drupal renderable link.
+ */
 function jdt_render_link($jdt_cid) {
   drupal_add_library('system', 'drupal.ajax');
   $link = l(
-    t('Ajax me'),
+    t('Edit this note'),
     'jdt/' . $jdt_cid . '/jdt_ajax/nojs/',
     array(
       'attributes' => array(
@@ -133,12 +196,18 @@ function jdt_render_link($jdt_cid) {
   return $link;
 }
 
+/**
+ * Ajax callback for when user clicks on "Edit this note".
+ * @param  int    $jdt_cid Specific Note ID.
+ * @param  String $type    Ajax for nojs
+ * @return Rendderable     Drupal output.
+ */
 function jdt_link_response($jdt_cid, $type = 'ajax') {
   if ($type == 'ajax') {
     module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
-    $output = jdt_user_notes_get_note($jdt_cid);
+    $output = drupal_render(drupal_get_form('jdt_user_notes_ajax_form', $jdt_cid));
     $commands = array();
-    $commands[] = ajax_command_append('#jdt_div_' . $jdt_cid, $output);
+    $commands[] = ajax_command_replace('#jdt_div_' . $jdt_cid, $output);
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   }
