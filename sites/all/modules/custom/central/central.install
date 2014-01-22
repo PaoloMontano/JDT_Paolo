@@ -97,3 +97,13 @@ function central_update_7205() {
   theme_enable($ar_themes);
   variable_set('theme_default', 'touch_custom');
 }
+
+/**
+ * Enables modal_forms.
+ */
+function central_update_7206() {
+  $ar_modules = array(
+    'modal_forms',
+  );
+  module_enable($ar_modules);
+}

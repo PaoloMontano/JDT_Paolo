@@ -11,7 +11,7 @@
 function jdt_user_notes_add_my_form($node, &$form_state, $jdt_node) {
   $cur_user = $GLOBALS['user'];
   $form['jdt_form_new'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'box',
     '#title' => t('New JDT User Notes'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
@@ -148,6 +148,7 @@ function jdt_user_notes_ajax_form($form, &$form_state, $jdt_cid) {
       'callback' => 'jdt_user_notes_ajax_callback',
       'method' => 'replace',
       'wrapper' => 'jdt_div_' . $jdt_cid,
+      'effect' => 'slide',
     ),
     '#value' => t('Submit'),
   );
@@ -178,7 +179,7 @@ function jdt_user_notes_ajax_callback($form, &$form_state) {
 }
 
 /**
- * [jdt_render_link description]
+ * Renders a link with 'use-ajax' class.
  * @param  int    $jdt_cid Specific Note ID.
  * @return String          Drupal renderable link.
  */
@@ -208,7 +209,10 @@ function jdt_link_response($jdt_cid, $type = 'ajax') {
     $output = drupal_render(drupal_get_form('jdt_user_notes_ajax_form', $jdt_cid));
     $commands = array();
     $commands[] = ajax_command_replace('#jdt_div_' . $jdt_cid, $output);
-    $page = array('#type' => 'ajax', '#commands' => $commands);
+    $page = array(
+      '#type' => 'ajax',
+      '#commands' => $commands,
+    );
     ajax_deliver($page);
   }
   else {

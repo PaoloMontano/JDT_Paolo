@@ -48,6 +48,13 @@ function jdt_user_notes_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/jdt_user_notes.forms.inc'
   );
+  $items['jdt/edit/%/%ctools_js'] = array(
+    'page callback' => 'jdt_user_notes_modal_add',
+    'page arguments' => array(2, 3),
+    'access arguments' => array('administer jdt_user_notes'),
+    'file' => 'includes/jdt_user_notes.theme.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -80,3 +87,29 @@ function jdt_user_notes_theme($existing, $type, $theme, $path) {
   );
 }
 
+/**
+ * Implements hook_node_view().
+ * @param  Node   $node      The node that is being assembled for rendering.
+ * @param  String $view_mode View mode for node.
+ * @param  String $langcode  The language code used for rendering.
+ */
+function jdt_user_notes_node_view($node, $view_mode, $langcode) {
+  if ($view_mode != 'full') {
+    return;
+  }
+  else if ($view_mode == 'full') {
+    $attributes = array();
+    $attributes['attributes'] = array(
+      'class' => array('use-ajax'),
+    );
+    $link = l(
+      t('Add a JDT Note'),
+      'jdt/edit/' . $node->vid . '/ajax',      
+      $attributes
+    );
+    $node->content['jdt_user_notes_modal_edit'] = array(
+      '#markup' => $link,
+      '#weight' => 60,
+    );
+  }
+}

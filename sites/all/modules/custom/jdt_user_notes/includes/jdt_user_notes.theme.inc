@@ -13,3 +13,25 @@ function jdt_user_notes_preprocess_jdt_user_notes_view(&$vars) {
   $vars['jdt_articles'] = array();
   $vars['jdt_articles'] = $jdt_notes_ar = jdt_user_notes_get_user_article($vars['jdt_article_id']);
 }
+
+/**
+ * Ajax call to add new JDT Note.
+ * @param  int    $jdt_cid Node ID for content.
+ * @param  String $ajax    Determined by %ctools wildcard in hook_menu().
+ * @return String          Only if JavaScript is disabled.
+ */
+function jdt_user_notes_modal_add($jdt_cid, $ajax) {
+  if ($ajax) {
+    ctools_include('modal');
+    ctools_include('ajax');
+    $modal_title = 'Add JDT Note';
+    module_load_include('inc', 'jdt_user_notes', 'includes/jdt_user_notes.forms');
+    $modal_content = drupal_render(drupal_get_form('jdt_user_notes_add_my_form', $jdt_cid));
+    ctools_modal_render($modal_title, $modal_content);
+  }
+  else {
+    $output = t("This isn't Ajax");
+    return $output;
+  }
+
+}
