@@ -97,7 +97,7 @@ function jdt_user_notes_node_view($node, $view_mode, $langcode) {
   if ($view_mode != 'full') {
     return;
   }
-  else if ($view_mode == 'full') {
+  elseif ($view_mode == 'full') {
     $attributes = array();
     $attributes['attributes'] = array(
       'class' => array('use-ajax'),
