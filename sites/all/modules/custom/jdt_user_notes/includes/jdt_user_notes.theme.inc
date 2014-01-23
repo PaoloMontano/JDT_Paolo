@@ -26,19 +26,27 @@ function jdt_user_notes_modal_add($jdt_cid, $ajax) {
     ctools_include('modal');
     ctools_include('ajax');
     $modal_title = 'Add JDT Note';
-    $modal_attributes = array(
-      'class' => array(
-        'ctools-close-modal',
-      ),
+    // $modal_attributes = array(
+    //   'class' => array(
+    //     'ctools-close-modal',
+    //   ),
+    // );
+    // $modal_content = drupal_get_form('jdt_user_notes_add_my_form', $jdt_cid);
+    // $modal_content['cancel'] = array(
+    //   '#type' => 'button',
+    //   '#value' => t('Cancel'),
+    //   '#attributes' => $modal_attributes,
+    // );
+    //ctools_modal_render($modal_title, $modal_content);
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => $modal_title,
     );
-    $modal_content = drupal_get_form('jdt_user_notes_add_my_form', $jdt_cid);
-    $modal_content['cancel'] = array(
-      '#type' => 'button',
-      '#value' => t('Cancel'),
-      '#attributes' => $modal_attributes,
-    );
-    ctools_modal_render($modal_title, $modal_content);
-
+    $output = ctools_modal_form_wrapper('jdt_user_notes_add_my_form', $form_state, $jdt_cid);
+    if (!empty($form_state['ajax_commands'])) {
+      $output = $form_state['ajax_commands'];
+    }
+    print ajax_render($output);
   }
   else {
     $output = t("This isn't Ajax");

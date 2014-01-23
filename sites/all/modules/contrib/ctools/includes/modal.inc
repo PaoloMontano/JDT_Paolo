@@ -199,6 +199,13 @@ function ctools_modal_text_button($text, $dest, $alt, $class = '') {
  *   form will never be redirected.
  */
 function ctools_modal_form_wrapper($form_id, &$form_state) {
+  // Allow other arguments to be passed through to form unction
+  // Remove $form_id and $form_state from the arguments.
+  $args = func_get_args();
+  array_shift($args);
+  array_shift($args);
+  $form_state['build_info']['args'] = $args;
+
   // This won't override settings already in.
   $form_state += array(
     're_render' => FALSE,

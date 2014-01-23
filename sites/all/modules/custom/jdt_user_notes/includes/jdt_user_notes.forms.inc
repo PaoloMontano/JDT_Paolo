@@ -104,6 +104,7 @@ function jdt_user_notes_edit_my_form($node, &$form_state, $jdt_cid) {
 function jdt_user_notes_add_my_form_submit($form, &$form_state) {
   module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
   jdt_user_notes_insert_vals($form_state['values']);
+  $form_state['ajax_commands'][] = ctools_modal_command_dismiss();
   drupal_set_message(t('Note ID: ' . jdt_user_notes_get_note_id()));
 }
 
