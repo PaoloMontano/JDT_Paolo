@@ -25,23 +25,21 @@ function jdt_user_notes_modal_add($jdt_cid, $ajax) {
     module_load_include('inc', 'jdt_user_notes', 'includes/jdt_user_notes.forms');
     ctools_include('modal');
     ctools_include('ajax');
-    $modal_title = 'Add JDT Note';
-    $modal_attributes = array(
-      'class' => array(
-        'ctools-close-modal',
-      ),
-    );
-    $modal_content = drupal_get_form('jdt_user_notes_add_my_form', $jdt_cid);
-    $modal_content['cancel'] = array(
-      '#type' => 'button',
-      '#value' => t('Cancel'),
-      '#attributes' => $modal_attributes,
-    );
-    ctools_modal_render($modal_title, $modal_content);
 
+    $form_state = array(
+      'ajax' => TRUE,
+      'target_article_id' => $jdt_cid,
+    );
+    $output = ctools_modal_form_wrapper('jdt_user_notes_ajax_add_new_note', $form_state);
+    if (!empty($form_state['executed'])) {
+      $output = array();
+      ctools_add_js('ajax-responder');
+      $output[] = ctools_modal_command_dismiss(t('Added New Note'));
+    }
+    print ajax_render($output);
   }
   else {
-    $output = t("This isn't Ajax");
+    $output = drupal_get_form('jdt_user_notes_add_my_form', $jdt_cid);
     return $output;
   }
 

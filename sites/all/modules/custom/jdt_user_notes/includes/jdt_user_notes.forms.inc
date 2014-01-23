@@ -50,6 +50,69 @@ function jdt_user_notes_add_my_form($node, &$form_state, $jdt_node) {
 }
 
 /**
+ * Associative array for new notes form.
+ * @return Associative Array for New Notes form.
+ */
+function jdt_user_notes_ajax_add_new_note($node, &$form_state) {
+  $cur_user = $GLOBALS['user'];
+  $jdt_node = $form_state['target_article_id'];
+
+  $form['jdt_form_new'] = array(
+    '#type' => 'box',
+    '#title' => t('New JDT User Notes'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  if (!node_load($jdt_node)) {
+    form_set_error('jdt_form_new', 'Article does not exist');
+  } else {
+    $form['jdt_form_new']['jdt_u_uid'] = array(
+      '#type' => 'textfield',
+      '#title' => t('User ID'),
+      '#default_value' => $cur_user->uid,
+      '#size' => 3,
+      '#maxlength' => 3,
+      '#disabled' => TRUE,
+    );
+    $form['jdt_form_new']['jdt_article_id'] = array(
+      '#type' => 'textfield',
+      '#title' => t('JDT Article Node ID'),
+      '#default_value' => $jdt_node,
+      '#disabled' => TRUE,
+      '#size' => 4,
+      '#maxlength' => 4,
+    );
+    $form['jdt_form_new']['jdt_user_note'] = array(
+      '#type' => 'textarea',
+      '#title' => 'Your user notes.',
+      '#required' => TRUE,
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Submit',
+    );
+
+    $modal_attributes = array(
+      'class' => array(
+        'ctools-close-modal',
+      ),
+    );
+    $form['cancel'] = array(
+      '#type' => 'button',
+      '#value' => t('Cancel'),
+      '#attributes' => $modal_attributes,
+    );
+  }
+  return $form;
+}
+
+function jdt_user_notes_ajax_add_new_note_submit($form, &$form_state) {
+  module_load_include('inc', 'jdt_user_notes', 'jdt_user_notes.api');
+  jdt_user_notes_insert_vals($form_state['values']);
+  $form_state['executed'] = TRUE;
+}
+
+/**
  * Associative array for edit notes form.
  * @return Associative Array for Edit Notes form.
  */
